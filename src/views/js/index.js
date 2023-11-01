@@ -1,5 +1,29 @@
 const socket = io();
 
+function checkSocketStatus() {
+  console.log('The state of the socket is ' + socket.connected);
+}
+
+//just for checking THIS IS NOT IMPIRTANT just for learning
+socket.on('connect', () => {
+  //just for checking
+  checkSocketStatus();
+});
+socket.on('disconnect', () => {
+  //just for checking
+  checkSocketStatus();
+});
+
+socket.io.on('reconnect_attempt', () => {
+  console.log('I am trying to reconnect !!!');
+});
+
+socket.io.on('reconnect', () => {
+  console.log('Hello I am back again !!!');
+});
+
+// END just for checking THIS IS NOT IMPIRTANT just for learning
+
 // Selecciono mis 3 botones que me permitirán conectarme a las salas
 const connectRoom1 = document.querySelector('#connectRoom1');
 const connectRoom2 = document.querySelector('#connectRoom2');
@@ -32,7 +56,8 @@ sendMessage.addEventListener('click', () => {
 // Recibir el evento del mensaje
 
 socket.on('send message', (data) => {
-  console.log('DATA---->', data);
+  //just for checking
+  checkSocketStatus();
 
   const { room } = data;
   const { message } = data;
